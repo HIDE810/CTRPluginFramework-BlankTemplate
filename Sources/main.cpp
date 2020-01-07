@@ -1,6 +1,7 @@
 #include "3ds.h"
 #include "csvc.h"
 #include "CTRPluginFramework.hpp"
+#include "introduction.cpp"
 
 #include <vector>
 
@@ -69,6 +70,9 @@ exit:
 
     void    InitMenu(PluginMenu &menu)
     {
+		menu += new MenuEntry("Crash", introduction, NULL);
+		menu += new MenuEntry("You really caused this?", spoiler, NULL);
+		
         // Create your entries here, or elsewhere
         // You can create your entries whenever/wherever you feel like it
     }
@@ -80,6 +84,9 @@ exit:
 
         // Synnchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
+		
+		//Not show welcome message
+		menu->ShowWelcomeMessage(false);
 
         // Init our menu entries & folders
         InitMenu(*menu);
