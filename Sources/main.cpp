@@ -1,7 +1,7 @@
 #include "3ds.h"
 #include "csvc.h"
 #include "CTRPluginFramework.hpp"
-#include "introduction.cpp"
+#include "FakeError.cpp"
 
 #include <vector>
 
@@ -70,8 +70,7 @@ exit:
 
     void    InitMenu(PluginMenu &menu)
     {
-		menu += new MenuEntry("Crash", introduction, NULL);
-		menu += new MenuEntry("You really caused this?", spoiler, NULL);
+		menu += new MenuEntry("Fake error", nullptr, FakeError, "This option will cause a fake error.\nSet the error status beforehand.");
 		
         // Create your entries here, or elsewhere
         // You can create your entries whenever/wherever you feel like it
