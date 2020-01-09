@@ -6,7 +6,7 @@
 
 #include <vector>
 
-#define PLUGIN_NAME			"Fake Error"
+#define PLUGIN_NAME			"MultiFunc3gx"
 
 #define MAJOR_VERSION		1
 #define MINER_VERSION		0

@@ -1,5 +1,5 @@
-# CTRPluginFramework - Blank Template
-A blank CTRPF plugin to be used by [Luma3DS with plugin loader](https://github.com/Nanquitas/Luma3DS/releases).
+# MultiFunc3gx
+A blank CTRPF plugin to be used by [Luma3DS with plugin loader](https://github.com/mariohackandglitch/Luma3DS/releases).
 
 A list of [all the code types supported by the ActionReplay is available here](https://gist.github.com/Nanquitas/d6c920a59c757cf7917c2bffa76de860).
 
