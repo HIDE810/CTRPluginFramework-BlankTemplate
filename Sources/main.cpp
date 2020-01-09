@@ -2,12 +2,22 @@
 #include "csvc.h"
 #include "CTRPluginFramework.hpp"
 #include "FakeError.cpp"
+#include "Information.cpp"
 
 #include <vector>
 
+#define PLUGIN_NAME			"Fake Error"
+
+#define MAJOR_VERSION		1
+#define MINER_VERSION		0
+#define REVISION_VERSION	0
+
 namespace CTRPluginFramework
 {
-    // This patch the NFC disabling the touchscreen when scanning an amiibo, which prevents ctrpf to be used
+	const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
+		u8"Twitter: https://twitter.com/HIDE810dev\n" \
+		u8"GitHub: https://github.com/HIDE810";
+	
     static void    ToggleTouchscreenForceOn(void)
     {
         static u32 original = 0;
@@ -54,15 +64,11 @@ exit:
         svcCloseHandle(processHandle);
     }
 
-    // This function is called before main and before the game starts
-    // Useful to do code edits safely
     void    PatchProcess(FwkSettings &settings)
     {
         ToggleTouchscreenForceOn();
     }
 
-    // This function is called when the process exits
-    // Useful to save settings, undo patchs or clean up things
     void    OnProcessExit(void)
     {
         ToggleTouchscreenForceOn();
@@ -70,32 +76,25 @@ exit:
 
     void    InitMenu(PluginMenu &menu)
     {
-		menu += new MenuEntry("Fake error", nullptr, FakeError, "This option will cause a fake error.\nSet the error status beforehand.");
+		std::string name1, name2, note1, note2;
 		
-        // Create your entries here, or elsewhere
-        // You can create your entries whenever/wherever you feel like it
+		name1 = Color::Yellow << "Fake error";
+		note1 = Color::Red << "Warning:\n\n" << Color::Orange << "This option will cause a fake error.\nSet the error status beforehand.";
+		menu += new MenuEntry(name1, nullptr, FakeError, note1);
+		
+		name2 = Color::SkyBlue << "Information";
+		note2 = Color::Yellow << "You can check some information about your console.";
+		menu += new MenuEntry(name2, nullptr, information, note2);
     }
 
     int     main(void)
     {
-        PluginMenu *menu = new PluginMenu("Action Replay", 0, 5, 1,
-                                            "A blank template plugin.\nGives you access to the ActionReplay and others tools.");
-
-        // Synnchronize the menu with frame event
+        PluginMenu *menu = new PluginMenu(PLUGIN_NAME, MAJOR_VERSION, MINER_VERSION, REVISION_VERSION, about);
         menu->SynchronizeWithFrame(true);
-		
-		//Not show welcome message
 		menu->ShowWelcomeMessage(false);
-
-        // Init our menu entries & folders
         InitMenu(*menu);
-
-        // Launch menu and mainloop
         menu->Run();
-
         delete menu;
-
-        // Exit plugin
         return (0);
     }
 }
