@@ -1,17 +1,11 @@
-#include "CTRPluginFramework.hpp"
+#include "common.hpp"
 
 namespace CTRPluginFramework
 {
-	using StringVector = std::vector<std::string>;
 	static StringVector status;
 	int buf;
 
-	struct Status
-	{
-		const char *name;
-	};
-
-	static const std::vector<Status> g_status =
+	static const std::vector<Item> g_status =
 	{
 		{"Reboot"},
 		{"Shutdown"}
@@ -65,10 +59,10 @@ namespace CTRPluginFramework
 	{
 		if (status.empty())
 		{
-			for (const Status &i : g_status)
+			for (const Item &i : g_status)
 				status.push_back(i.name);
 		}
-		Keyboard keyboard("Select the error status.", status);
+		Keyboard keyboard("Select the error status:", status);
 		int choice = keyboard.Open();
 
 		switch (choice){

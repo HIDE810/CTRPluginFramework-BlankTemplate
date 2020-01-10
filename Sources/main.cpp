@@ -1,13 +1,7 @@
-#include "3ds.h"
-#include "csvc.h"
-#include "CTRPluginFramework.hpp"
-#include "FakeError.cpp"
-#include "Information.cpp"
-
+#include "common.hpp"
 #include <vector>
 
 #define PLUGIN_NAME			"MultiFunc3gx"
-
 #define MAJOR_VERSION		1
 #define MINER_VERSION		0
 #define REVISION_VERSION	0
@@ -17,6 +11,21 @@ namespace CTRPluginFramework
 	const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
 		u8"Twitter: https://twitter.com/HIDE810dev\n" \
 		u8"GitHub: https://github.com/HIDE810";
+		
+	void    InitMenu(PluginMenu &menu)
+    {
+		std::string name1, name2, note1, note2;
+		
+		name1 = Color::Yellow << "Fake error";
+		note1 = Color::Red << "Warning:\n\n" << Color::Orange << "This option will cause a fake error.\nSet the error status beforehand.";
+		menu += new MenuEntry(name1, nullptr, FakeError, note1);
+		
+		name2 = Color::SkyBlue << "Information";
+		note2 = Color::Yellow << "You can check some information about your console.";
+		menu += new MenuEntry(name2, nullptr, Information, note2);
+		
+		menu += new MenuEntry("Calculator", nullptr, Calculator, "");
+    }
 	
     static void    ToggleTouchscreenForceOn(void)
     {
@@ -74,24 +83,10 @@ exit:
         ToggleTouchscreenForceOn();
     }
 
-    void    InitMenu(PluginMenu &menu)
-    {
-		std::string name1, name2, note1, note2;
-		
-		name1 = Color::Yellow << "Fake error";
-		note1 = Color::Red << "Warning:\n\n" << Color::Orange << "This option will cause a fake error.\nSet the error status beforehand.";
-		menu += new MenuEntry(name1, nullptr, FakeError, note1);
-		
-		name2 = Color::SkyBlue << "Information";
-		note2 = Color::Yellow << "You can check some information about your console.";
-		menu += new MenuEntry(name2, nullptr, information, note2);
-    }
-
     int     main(void)
     {
         PluginMenu *menu = new PluginMenu(PLUGIN_NAME, MAJOR_VERSION, MINER_VERSION, REVISION_VERSION, about);
         menu->SynchronizeWithFrame(true);
-		menu->ShowWelcomeMessage(false);
         InitMenu(*menu);
         menu->Run();
         delete menu;

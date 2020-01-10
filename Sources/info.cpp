@@ -1,16 +1,10 @@
-#include "CTRPluginFramework.hpp"
+#include "common.hpp"
 
 namespace CTRPluginFramework
 {
-	using StringVector = std::vector<std::string>;
 	static StringVector info;
 	
-	struct Info
-	{
-		const char *type;
-	};
-	
-	static const std::vector<Info> g_info =
+	static const std::vector<Item> g_info =
 	{
 		{"TitleID"},
 		{"Console Type"},
@@ -48,14 +42,14 @@ namespace CTRPluginFramework
 		}
 	}
 	
-	void information(MenuEntry *entry)
+	void Information(MenuEntry *entry)
 	{
 		if(info.empty())
 		{
-			for (const Info &i : g_info)
-				info.push_back(i.type);
+			for (const Item &i : g_info)
+				info.push_back(i.name);
 		}
-		Keyboard keyboard("Select the item you want to check.", info);
+		Keyboard keyboard("Select which item you'd like to check", info);
 		int choice = keyboard.Open();
 		
 		switch (choice) {
