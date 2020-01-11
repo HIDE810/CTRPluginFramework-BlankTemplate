@@ -17,6 +17,7 @@ namespace CTRPluginFramework
 	void FakeError(MenuEntry *entry);
 	void Information(MenuEntry *entry);
 	void Calculator(MenuEntry *entry);
+	void HexToDec(MenuEntry *entry);
 }
 
 #endif

@@ -16,7 +16,7 @@ namespace CTRPluginFramework
     {
 		std::string name1, name2, note1, note2;
 		
-		name1 = Color::Yellow << "Fake error";
+		name1 = Color::Yellow << "Fake Error";
 		note1 = Color::Red << "Warning:\n\n" << Color::Orange << "This option will cause a fake error.\nSet the error status beforehand.";
 		menu += new MenuEntry(name1, nullptr, FakeError, note1);
 		
@@ -24,7 +24,8 @@ namespace CTRPluginFramework
 		note2 = Color::Yellow << "You can check some information about your console.";
 		menu += new MenuEntry(name2, nullptr, Information, note2);
 		
-		menu += new MenuEntry("Calculator", nullptr, Calculator, "");
+		menu += new MenuEntry("Hex Calculator", nullptr, Calculator, "");
+		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec, "");
     }
 	
     static void    ToggleTouchscreenForceOn(void)

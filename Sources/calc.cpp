@@ -1,10 +1,14 @@
 #include "common.hpp"
 
+#include <iostream>
+#include <sstream>
+
 namespace CTRPluginFramework
 {
-	u32 data;
+	u32 data, input;
 	int hex1, hex2, choice, ans;
-	std::string result;
+	std::stringstream hexans;
+	std::string decans, value;
 
 	static const std::vector<Item> g_calc =
 	{
@@ -54,13 +58,25 @@ namespace CTRPluginFramework
 				{
 					hex2 = data;
 					Calculate();
-					result = std::to_string(ans);
-					MessageBox("Result: " + result)();
+					hexans << std::uppercase << std::hex << ans;
+					decans = std::to_string(ans);
+					MessageBox("Hex:" + hexans.str() + "\nDec: " + decans)();
+					
+					hexans.str("");
+					hexans.clear(std::stringstream::goodbit);
 				}
 				else choice = -1;
 			}
 			else data = -1;
 		}
 	}
+
+	void HexToDec(MenuEntry *entry)
+	{
+		Keyboard keyboard("Enter a number (in hex):");
+		if (keyboard.Open(input) != -1) {
+			value = std::to_string(input);
+			MessageBox("Result: " + value)();
+		}
+	}
 }
-				
