@@ -60,7 +60,7 @@ namespace CTRPluginFramework
 					Calculate();
 					hexans << std::uppercase << std::hex << ans;
 					decans = std::to_string(ans);
-					MessageBox("Hex:" + hexans.str() + "\nDec: " + decans)();
+					MessageBox("Hex: " + hexans.str() + "\nDec: " + decans)();
 					
 					hexans.str("");
 					hexans.clear(std::stringstream::goodbit);
