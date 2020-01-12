@@ -4,6 +4,7 @@ namespace CTRPluginFramework
 {
 	static StringVector status;
 	int buf;
+	std::string Activate;
 
 	static const std::vector<Item> g_status =
 	{
@@ -76,9 +77,7 @@ namespace CTRPluginFramework
 		
 		if (choice != -1)
 		{
-			std::string Activate = Color::LimeGreen << g_status[choice].name;
-			entry->Name() = Activate;
-			
+			entry->Name() = Activate << Color::LimeGreen << g_status[choice].name;
 			entry->SetGameFunc([](MenuEntry *entry)
 			{
 				if (entry->IsActivated()) DrawString();
