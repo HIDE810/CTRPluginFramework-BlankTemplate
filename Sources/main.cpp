@@ -86,22 +86,17 @@ exit:
     void    PatchProcess(FwkSettings &settings)
     {
         ToggleTouchscreenForceOn();
-		
-		//Custom Settings
-		/*
-		settings.WaitTimeToBoot = Seconds(0);
-		
+
 		settings.MainTextColor = Color::Black;
 		settings.WindowTitleColor = Color::Black;
 		settings.MenuSelectedItemColor = Color::Black;
-		settings.MenuUnselectedItemColor = Color::DimGrey;
-		settings.BackgroundMainColor = Color::Silver;
-		settings.BackgroundSecondaryColor = Color::Silver;
+		settings.MenuUnselectedItemColor = Color::BlackGrey;
+		settings.BackgroundMainColor = Color::DimGrey;
+		settings.BackgroundSecondaryColor = Color::DimGrey;
 		settings.BackgroundBorderColor = Color::Black;
 		
-		settings.Keyboard = {Color::Silver, Color::Silver, Color::Gray, Color::Black, Color::Black, Color::Black, Color::Black};
-		settings.CustomKeyboard = {Color::White, Color::White, Color::Black, Color::White, Color::White, Color::White, Color::White, Color::White, Color::White};
-		*/
+		settings.Keyboard = {Color::DimGrey, Color::DimGrey, Color::Silver, Color::Black, Color::Black, Color::Black, Color::Black};
+		settings.CustomKeyboard = {Color::DimGrey, Color::DimGrey, Color::Black, Color::DarkGrey, Color::Gainsboro, Color::Black, Color::White, Color::Silver, Color::DarkGrey};
     }
 
     void    OnProcessExit(void)

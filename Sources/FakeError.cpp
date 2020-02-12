@@ -77,7 +77,7 @@ namespace CTRPluginFramework
 		
 		if (choice != -1)
 		{
-			entry->Name() = Activate << Color::LimeGreen << g_status[choice].name;
+			entry->Name() = Activate << g_status[choice].name;
 			entry->SetGameFunc([](MenuEntry *entry)
 			{
 				if (entry->IsActivated()) DrawString();
