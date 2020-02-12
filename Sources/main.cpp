@@ -1,5 +1,4 @@
 #include "common.hpp"
-#include <vector>
 
 #define PLUGIN_NAME			"MultiFunc3gx"
 #define MAJOR_VERSION		1
@@ -11,13 +10,31 @@ namespace CTRPluginFramework
 	const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
 		u8"Twitter: https://twitter.com/HIDE810dev\n" \
 		u8"GitHub: https://github.com/HIDE810";
-		
+
+	static MenuEntry *EntryWithHotkey(MenuEntry *entry, const Hotkey &hotkey)
+    {
+        if (entry != nullptr)
+        {
+            entry->Hotkeys += hotkey;
+            entry->SetArg(new std::string(entry->Name()));
+            entry->Name() += " " + hotkey.ToString();
+            entry->Hotkeys.OnHotkeyChangeCallback([](MenuEntry *entry, int index)
+            {
+                std::string *name = reinterpret_cast<std::string *>(entry->GetArg());
+
+                entry->Name() = *name + " " + entry->Hotkeys[0].ToString();
+            });
+        }
+		return (entry);
+    }
+	
 	void    InitMenu(PluginMenu &menu)
     {
-		menu += new MenuEntry(Color::Yellow << "Fake Error", nullptr, FakeError, Color::Red << "Warning:\n\n" << Color::Orange << "This option will cause a fake error.\nSet the error status beforehand.");
-		menu += new MenuEntry(Color::SkyBlue << "Information", nullptr, Information, Color::Yellow << "You can check some information about your console.");
-		menu += new MenuEntry("Hex Calculator", nullptr, Calculator, "");
-		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec, "");
+		menu += new MenuEntry("Fake Error", nullptr, FakeError);
+		menu += new MenuEntry("Information", nullptr, Information);
+		menu += new MenuEntry("Hex Calculator", nullptr, Calculator);
+		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec);
+		menu += EntryWithHotkey(new MenuEntry("Random Flash", RandomFlash), Hotkey(Key::X, "Random Flash"));
     }
 	
     static void    ToggleTouchscreenForceOn(void)
@@ -69,6 +86,22 @@ exit:
     void    PatchProcess(FwkSettings &settings)
     {
         ToggleTouchscreenForceOn();
+		
+		//Custom Settings
+		/*
+		settings.WaitTimeToBoot = Seconds(0);
+		
+		settings.MainTextColor = Color::Black;
+		settings.WindowTitleColor = Color::Black;
+		settings.MenuSelectedItemColor = Color::Black;
+		settings.MenuUnselectedItemColor = Color::DimGrey;
+		settings.BackgroundMainColor = Color::Silver;
+		settings.BackgroundSecondaryColor = Color::Silver;
+		settings.BackgroundBorderColor = Color::Black;
+		
+		settings.Keyboard = {Color::Silver, Color::Silver, Color::Gray, Color::Black, Color::Black, Color::Black, Color::Black};
+		settings.CustomKeyboard = {Color::White, Color::White, Color::Black, Color::White, Color::White, Color::White, Color::White, Color::White, Color::White};
+		*/
     }
 
     void    OnProcessExit(void)

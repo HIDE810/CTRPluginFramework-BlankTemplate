@@ -18,6 +18,7 @@ namespace CTRPluginFramework
 	void Information(MenuEntry *entry);
 	void Calculator(MenuEntry *entry);
 	void HexToDec(MenuEntry *entry);
+	void RandomFlash(MenuEntry *entry);
 }
 
 #endif

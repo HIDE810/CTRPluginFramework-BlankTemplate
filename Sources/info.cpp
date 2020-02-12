@@ -49,7 +49,7 @@ namespace CTRPluginFramework
 			for (const Item &i : g_info)
 				info.push_back(i.name);
 		}
-		Keyboard keyboard("Select which item you'd like to check", info);
+		Keyboard keyboard("Select the item you want to show.", info);
 		int choice = keyboard.Open();
 		
 		switch (choice) {

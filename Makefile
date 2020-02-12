@@ -67,7 +67,7 @@ all: $(BUILD)
 
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) -s --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) -j1 -s --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 clean:
