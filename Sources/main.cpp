@@ -1,8 +1,8 @@
 #include "common.hpp"
 
 #define PLUGIN_NAME			"MultiFunc3gx"
-#define MAJOR_VERSION		1
-#define MINER_VERSION		1
+#define MAJOR_VERSION		2
+#define MINER_VERSION		0
 #define REVISION_VERSION	0
 
 namespace CTRPluginFramework
@@ -86,17 +86,6 @@ exit:
     void    PatchProcess(FwkSettings &settings)
     {
         ToggleTouchscreenForceOn();
-
-		settings.MainTextColor = Color::Black;
-		settings.WindowTitleColor = Color::Black;
-		settings.MenuSelectedItemColor = Color::Black;
-		settings.MenuUnselectedItemColor = Color::BlackGrey;
-		settings.BackgroundMainColor = Color::DimGrey;
-		settings.BackgroundSecondaryColor = Color::DimGrey;
-		settings.BackgroundBorderColor = Color::Black;
-		
-		settings.Keyboard = {Color::DimGrey, Color::DimGrey, Color::Silver, Color::Black, Color::Black, Color::Black, Color::Black};
-		settings.CustomKeyboard = {Color::DimGrey, Color::DimGrey, Color::Black, Color::DarkGrey, Color::Gainsboro, Color::Black, Color::White, Color::Silver, Color::DarkGrey};
     }
 
     void    OnProcessExit(void)
