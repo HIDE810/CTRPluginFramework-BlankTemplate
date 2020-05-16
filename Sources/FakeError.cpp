@@ -4,7 +4,7 @@ namespace CTRPluginFramework
 {
 	static StringVector status;
 	int buf;
-	std::string Activate;
+	std::string Activate, tid;
 
 	static const std::vector<Item> g_status =
 	{
@@ -14,8 +14,14 @@ namespace CTRPluginFramework
 	
 	void PowerChange(void)
 	{
+		ptmSysmInit();
+		
 		Handle serviceHandle = 0;
 		Result result = srvGetServiceHandle(&serviceHandle, "ptm:sysm");
+		
+		if (result != 0) {
+            return;
+        }
 
 		u32 *commandBuffer = getThreadCommandBuffer();
 		commandBuffer[0] = buf;
@@ -27,37 +33,41 @@ namespace CTRPluginFramework
 
 		svcSendSyncRequest(serviceHandle);
 		svcCloseHandle(serviceHandle);
+		
+		ptmSysmExit();
 	}
-	
-	void DrawString(void)
-	{
-		OSD::Run([](const Screen &screen)
+    
+    bool DrawErrorMessage(const Screen &screen)
+    {
+        if (screen.IsTop)
+		    return false;
+		
+		if (!screen.IsTop)
 		{
-			if (!screen.IsTop)
-				return false;
+			screen.FlushFramebuffer();
 			
-			screen.DrawRect(0, 0, 400, 240, Color::Black);
-			screen.DrawSysfont(Utils::Format("An exception occurred"), 10, 10, Color::Red);
-			screen.DrawSysfont(Utils::Format("Processor:          ARM9"), 10, 35);
-			screen.DrawSysfont(Utils::Format("Exception type:  undfined introduction"), 10, 47);
-			screen.DrawSysfont(Utils::Format("R0      00000000       R1      00000000"), 10, 72);
-			screen.DrawSysfont(Utils::Format("R2      00000000       R3      00000000"), 10, 84);
-			screen.DrawSysfont(Utils::Format("R4      00000000       R5      00000000"), 10, 96);
-			screen.DrawSysfont(Utils::Format("R6      00000000       R7      00000000"), 10, 108);
-			screen.DrawSysfont(Utils::Format("R8      00000000       R9      00000000"), 10, 120);
-			screen.DrawSysfont(Utils::Format("R10   00000000       R11   00000000"), 10, 132);
-			screen.DrawSysfont(Utils::Format("R12   00000000       SP      00000000"), 10, 144);
-			screen.DrawSysfont(Utils::Format("LR      00000000       PC      00000000"), 10, 156);
-			screen.DrawSysfont(Utils::Format("Press A to continue"), 10, 181);
-					
+			screen.DrawRect(0, 0, 320, 240, Color::Black);
+			screen.Draw("An error occurred (ErrDisp)", 10, 10, Color::Red);
+			screen.Draw("Error type:       generic", 10, 30);
+			screen.Draw("Process ID:       9", 10, 50);
+			screen.Draw("Process name:     Fake Error", 10, 60);
+			screen.Draw("Process title ID: 0x" << tid, 10, 70);
+			screen.Draw("Address:          0x00000000", 10, 90);
+			screen.Draw("Error code:       0x00000000", 10, 100);
+			screen.Draw("Press A to continue.", 10, 140);
+			
 			if (Controller::IsKeyDown(A))
 				PowerChange();
-			return true;
-		});
-	}
+			
+			tid.clear();
+		}
+		return true;
+    }
 
 	void FakeError(MenuEntry *entry)
 	{
+        bool DrawErrorMessage(const Screen &screen);
+        
 		if (status.empty())
 		{
 			for (const Item &i : g_status)
@@ -80,9 +90,15 @@ namespace CTRPluginFramework
 			entry->Name() = Activate << g_status[choice].name;
 			entry->SetGameFunc([](MenuEntry *entry)
 			{
-				if (entry->IsActivated()) DrawString();
+				if (entry->IsActivated())
+				{
+					Process::GetTitleID(tid);
+                    OSD::Run(DrawErrorMessage);
+				}
+                
+                if (!entry->IsActivated())
+					OSD::Stop(DrawErrorMessage);
 			});
 		}
-		
 	}
 }

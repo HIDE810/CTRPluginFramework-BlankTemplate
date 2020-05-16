@@ -12,7 +12,7 @@ PLGINFO 	:= 	$(notdir $(TOPDIR)).plgInfo
 
 BUILD		:= 	Build
 INCLUDES	:= 	Includes
-LIBDIRS		:= 	$(TOPDIR)
+LIBDIRS		:= 	$(TOPDIR) $(CTRULIB)
 SOURCES 	:= 	Sources
 IP			:=  5
 FTP_HOST 	:=	192.168.1.
@@ -34,7 +34,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 ASFLAGS		:= $(ARCH)
 LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -Wl,--gc-sections,--strip-discarded,--strip-debug
 
-LIBS		:= -lCTRPluginFramework
+LIBS		:= -lCTRPluginFramework -lctru
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
