@@ -15,10 +15,10 @@ namespace CTRPluginFramework
 	void PowerChange(void)
 	{
 		ptmSysmInit();
-		
+
 		Handle serviceHandle = 0;
 		Result result = srvGetServiceHandle(&serviceHandle, "ptm:sysm");
-		
+
 		if (result != 0) {
             return;
         }
@@ -27,25 +27,23 @@ namespace CTRPluginFramework
 		commandBuffer[0] = buf;
 		commandBuffer[1] = 0x00000000;
 		commandBuffer[2] = 0x00000000;
-						
+
 		if (buf == 0x040700C0)
 			commandBuffer[3] = 0x00000000;
 
 		svcSendSyncRequest(serviceHandle);
 		svcCloseHandle(serviceHandle);
-		
+
 		ptmSysmExit();
 	}
     
     bool DrawErrorMessage(const Screen &screen)
     {
         if (screen.IsTop)
-		    return false;
-		
+			return false;
+
 		if (!screen.IsTop)
 		{
-			screen.FlushFramebuffer();
-			
 			screen.DrawRect(0, 0, 320, 240, Color::Black);
 			screen.Draw("An error occurred (ErrDisp)", 10, 10, Color::Red);
 			screen.Draw("Error type:       generic", 10, 30);
@@ -55,10 +53,10 @@ namespace CTRPluginFramework
 			screen.Draw("Address:          0x00000000", 10, 90);
 			screen.Draw("Error code:       0x00000000", 10, 100);
 			screen.Draw("Press A to continue.", 10, 140);
-			
+
 			if (Controller::IsKeyDown(A))
 				PowerChange();
-			
+
 			tid.clear();
 		}
 		return true;
@@ -66,8 +64,8 @@ namespace CTRPluginFramework
 
 	void FakeError(MenuEntry *entry)
 	{
-        bool DrawErrorMessage(const Screen &screen);
-        
+		bool DrawErrorMessage(const Screen &screen);
+
 		if (status.empty())
 		{
 			for (const Item &i : g_status)
@@ -84,7 +82,7 @@ namespace CTRPluginFramework
 				buf = 0x040700C0;
 				break;
 		}
-		
+
 		if (choice != -1)
 		{
 			entry->Name() = Activate << g_status[choice].name;
@@ -93,10 +91,10 @@ namespace CTRPluginFramework
 				if (entry->IsActivated())
 				{
 					Process::GetTitleID(tid);
-                    OSD::Run(DrawErrorMessage);
+					OSD::Run(DrawErrorMessage);
 				}
-                
-                if (!entry->IsActivated())
+
+				if (!entry->IsActivated())
 					OSD::Stop(DrawErrorMessage);
 			});
 		}
