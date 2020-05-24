@@ -2,7 +2,7 @@
 
 #define PLUGIN_NAME			"MultiFunc3gx"
 #define MAJOR_VERSION		2
-#define MINER_VERSION		1
+#define MINER_VERSION		2
 #define REVISION_VERSION	0
 
 namespace CTRPluginFramework
@@ -31,9 +31,9 @@ namespace CTRPluginFramework
 	void    InitMenu(PluginMenu &menu)
     {
 		menu += new MenuEntry("Fake Error", nullptr, FakeError);
-		menu += new MenuEntry("Information", nullptr, Information);
 		menu += new MenuEntry("Hex Calculator", nullptr, Calculator);
 		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec);
+		menu += new MenuEntry("Information", Information);
 		menu += EntryWithHotkey(new MenuEntry("Random Flash", RandomFlash), Hotkey(Key::X, "Random Flash"));
     }
 	
