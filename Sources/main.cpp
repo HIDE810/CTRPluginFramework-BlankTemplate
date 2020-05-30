@@ -35,6 +35,7 @@ namespace CTRPluginFramework
 		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec);
 		menu += new MenuEntry("Information", Information);
 		menu += EntryWithHotkey(new MenuEntry("Random Flash", RandomFlash), Hotkey(Key::X, "Random Flash"));
+        menu += new MenuEntry("Hash Dumper", nullptr, HashDumper);
     }
 	
     static void    ToggleTouchscreenForceOn(void)
