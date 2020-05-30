@@ -2,7 +2,7 @@
 
 #define PLUGIN_NAME			"MultiFunc3gx"
 #define MAJOR_VERSION		2
-#define MINER_VERSION		2
+#define MINER_VERSION		3
 #define REVISION_VERSION	0
 
 namespace CTRPluginFramework
