@@ -4,6 +4,7 @@ namespace CTRPluginFramework
 {
 	static StringVector status;
 	int buf;
+	bool reboot;
 	std::string Activate, tid;
 
 	static const std::vector<Item> g_status =
@@ -11,32 +12,7 @@ namespace CTRPluginFramework
 		{"Reboot"},
 		{"Shutdown"}
 	};
-	
-	void PowerChange(void)
-	{
-		ptmSysmInit();
 
-		Handle serviceHandle = 0;
-		Result result = srvGetServiceHandle(&serviceHandle, "ptm:sysm");
-
-		if (result != 0) {
-            return;
-        }
-
-		u32 *commandBuffer = getThreadCommandBuffer();
-		commandBuffer[0] = buf;
-		commandBuffer[1] = 0x00000000;
-		commandBuffer[2] = 0x00000000;
-
-		if (buf == 0x040700C0)
-			commandBuffer[3] = 0x00000000;
-
-		svcSendSyncRequest(serviceHandle);
-		svcCloseHandle(serviceHandle);
-
-		ptmSysmExit();
-	}
-    
     bool DrawErrorMessage(const Screen &screen)
     {
         if (screen.IsTop)
@@ -54,8 +30,7 @@ namespace CTRPluginFramework
 			screen.Draw("Error code:       0x00000000", 10, 100);
 			screen.Draw("Press A to continue.", 10, 140);
 
-			if (Controller::IsKeyDown(A))
-				PowerChange();
+			if (Controller::IsKeyDown(A)) (reboot? APT_HardwareResetAsync() : srvPublishToSubscriber(0x203, 0));
 
 			tid.clear();
 		}
@@ -75,12 +50,8 @@ namespace CTRPluginFramework
 		int choice = keyboard.Open();
 
 		switch (choice){
-			case 0:
-				buf = 0x04090080;
-				break;
-			case 1:
-				buf = 0x040700C0;
-				break;
+			case 0: reboot = true; break;
+			case 1: reboot = false; break;
 		}
 
 		if (choice != -1)

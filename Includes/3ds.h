@@ -16,7 +16,6 @@ extern "C" {
 #include "ctrulib/services/gspgpu.h"
 #include "ctrulib/services/hid.h"
 #include "ctrulib/services/irrst.h"
-#include "ctrulib/services/ptmsysm.h"
 
 #include "ctrulib/util/utf.h"
 
