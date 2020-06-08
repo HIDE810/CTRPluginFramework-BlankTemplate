@@ -1,15 +1,15 @@
 #include "common.hpp"
 
-#define PLUGIN_NAME			"MultiFunc3gx"
-#define MAJOR_VERSION		2
-#define MINER_VERSION		3
-#define REVISION_VERSION	0
+#define PLUGIN_NAME         "MultiFunc3gx"
+#define MAJOR_VERSION       2
+#define MINER_VERSION       4
+#define REVISION_VERSION    0
 
 namespace CTRPluginFramework
 {
-	const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
-		u8"Twitter: https://twitter.com/HIDE810dev\n" \
-		u8"GitHub: https://github.com/HIDE810";
+    const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
+        u8"Twitter: https://twitter.com/HIDE810dev\n" \
+        u8"GitHub: https://github.com/HIDE810";
 
 	static MenuEntry *EntryWithHotkey(MenuEntry *entry, const Hotkey &hotkey)
     {
@@ -30,12 +30,21 @@ namespace CTRPluginFramework
 	
 	void    InitMenu(PluginMenu &menu)
     {
-		menu += new MenuEntry("Fake Error", nullptr, FakeError);
-		menu += new MenuEntry("Hex Calculator", nullptr, Calculator);
-		menu += new MenuEntry("Hex to Dec", nullptr, HexToDec);
-		menu += new MenuEntry("Information", Information);
-		menu += EntryWithHotkey(new MenuEntry("Random Flash", RandomFlash), Hotkey(Key::X, "Random Flash"));
+        menu += new MenuFolder("Hex", "",
+        {
+            new MenuEntry("Hex calculator", nullptr, Calculator),
+            new MenuEntry("Hex to Dec", nullptr, HexToDec)
+        });
+        
+        menu += new MenuFolder("Flash", "",
+        {
+            EntryWithHotkey(new MenuEntry("Random flash", RandomFlash), Hotkey(Key::X, "Random Flash")),
+            new MenuEntry("Touch flash", TouchFlash)
+        });
+        
+        menu += new MenuEntry("Fake error", nullptr, FakeError);
         menu += new MenuEntry("Hash Dumper", nullptr, HashDumper);
+        menu += new MenuEntry("Information", Information);
     }
 	
     static void    ToggleTouchscreenForceOn(void)

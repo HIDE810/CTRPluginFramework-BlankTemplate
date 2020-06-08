@@ -19,6 +19,7 @@ namespace CTRPluginFramework
 	void Calculator(MenuEntry *entry);
 	void HexToDec(MenuEntry *entry);
 	void RandomFlash(MenuEntry *entry);
+    void TouchFlash(MenuEntry *entry);
     void HashDumper(MenuEntry *entry);
 }
 
