@@ -8,7 +8,7 @@ namespace CTRPluginFramework
 	{	
 		if (entry->Hotkeys[0].IsDown())
 		{
-			*p = Utils::Random(0, 0xFFFFFF) + 0x01000000;
+			*p = Utils::Random(0, 0xFFFFFF) + 0x1000000;
 			
 			for (u32 i = 0; i < 64; i++)
 				svcSleepThread(10000000);

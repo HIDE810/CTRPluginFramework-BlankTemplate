@@ -2,7 +2,7 @@
 
 #define PLUGIN_NAME         "MultiFunc3gx"
 #define MAJOR_VERSION       2
-#define MINER_VERSION       4
+#define MINER_VERSION       5
 #define REVISION_VERSION    0
 
 namespace CTRPluginFramework
@@ -40,6 +40,13 @@ namespace CTRPluginFramework
         {
             EntryWithHotkey(new MenuEntry("Random flash", RandomFlash), Hotkey(Key::X, "Random Flash")),
             new MenuEntry("Touch flash", TouchFlash)
+        });
+        
+        menu += new MenuFolder("Service test", "",
+        {
+            new MenuEntry("Force power button (ID:0x202)", ForcePowerButton),
+            new MenuEntry("Force HOME button (ID:0x204)", ForceHomeButton),
+            new MenuEntry("Shutdown (ID:0x203)", Shutdown)
         });
         
         menu += new MenuEntry("Fake error", nullptr, FakeError);
