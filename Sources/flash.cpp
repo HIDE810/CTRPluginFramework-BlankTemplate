@@ -12,10 +12,10 @@ namespace CTRPluginFramework
 
             //Sleep thread for 1.0s
             svcSleepThread(1000000000);
-		}
-		else *p = 0;
-	}
-    
+        }
+        else *p = 0;
+    }
+
     void TouchFlash(MenuEntry *entry)
     {
         touchPosition tp;
