@@ -49,6 +49,7 @@ namespace CTRPluginFramework
             new MenuEntry("Shutdown (ID:0x203)", Shutdown)
         });
         
+        menu += new MenuEntry("Change screen brightness", nullptr, ChangeBrightness);
         menu += new MenuEntry("Fake error", nullptr, FakeError);
         menu += new MenuEntry("Hash Dumper", nullptr, HashDumper);
         menu += new MenuEntry("Information", Information);
