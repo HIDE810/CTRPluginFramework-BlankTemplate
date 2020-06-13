@@ -7,18 +7,18 @@
 
 namespace CTRPluginFramework
 {
-	using StringVector = std::vector<std::string>;
-	
-	struct Item
-	{
-		const char *name;
-	};
-
-	void FakeError(MenuEntry *entry);
-	void Information(MenuEntry *entry);
-	void Calculator(MenuEntry *entry);
-	void HexToDec(MenuEntry *entry);
-	void RandomFlash(MenuEntry *entry);
+    using StringVector = std::vector<std::string>;
+    
+    struct Item
+    {
+        const char *name;
+    };
+    
+    void FakeError(MenuEntry *entry);
+    void Information(MenuEntry *entry);
+    void Calculator(MenuEntry *entry);
+    void HexToDec(MenuEntry *entry);
+    void RandomFlash(MenuEntry *entry);
     void TouchFlash(MenuEntry *entry);
     void ChangeBrightness(MenuEntry *entry);
     void HashDumper(MenuEntry *entry);
