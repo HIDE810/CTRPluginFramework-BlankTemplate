@@ -8,7 +8,6 @@
 
 namespace CTRPluginFramework
 {
-    int ret;
     std::string titleid;
     
     std::string SystemModel()
@@ -26,7 +25,7 @@ namespace CTRPluginFramework
             "NEW 2DS XL"
         };
         
-        ret = CFGU_GetSystemModel(&model);
+        CFGU_GetSystemModel(&model);
         models << "Model: " << Model[model];
         return models.str();
     }
@@ -47,7 +46,7 @@ namespace CTRPluginFramework
             "Taiwan"
         };
         
-        ret = CFGU_SecureInfoGetRegion(&region);
+        CFGU_SecureInfoGetRegion(&region);
         regions << "Region: " << Region[region];
         return regions.str();
     }

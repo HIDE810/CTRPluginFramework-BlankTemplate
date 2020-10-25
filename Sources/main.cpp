@@ -45,8 +45,8 @@ namespace CTRPluginFramework
         menu += new MenuFolder("Service test", "",
         {
             new MenuEntry("Force power button (ID:0x202)", ForcePowerButton),
-            new MenuEntry("Force HOME button (ID:0x204)", ForceHomeButton),
-            new MenuEntry("Shutdown (ID:0x203)", Shutdown)
+            new MenuEntry("Shutdown (ID:0x203)", Shutdown),
+            new MenuEntry("Force HOME button (ID:0x204)", ForceHomeButton)
         });
         
         menu += new MenuEntry("Change screen brightness", nullptr, ChangeBrightness);

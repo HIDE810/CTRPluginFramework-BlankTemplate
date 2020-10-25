@@ -23,8 +23,8 @@ namespace CTRPluginFramework
     void ChangeBrightness(MenuEntry *entry);
     void HashDumper(MenuEntry *entry);
     void ForcePowerButton(MenuEntry *entry);
-    void ForceHomeButton(MenuEntry *entry);
     void Shutdown(MenuEntry *entry);
+    void ForceHomeButton(MenuEntry *entry);
 }
 
 #endif

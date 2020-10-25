@@ -7,13 +7,13 @@ namespace CTRPluginFramework
         srvPublishToSubscriber(0x202, 0);
     }
     
-    void ForceHomeButton(MenuEntry *entry)
-    {
-        srvPublishToSubscriber(0x204, 0);
-    }
-    
     void Shutdown(MenuEntry *entry)
     {
         srvPublishToSubscriber(0x203, 0);
+    }
+    
+    void ForceHomeButton(MenuEntry *entry)
+    {
+        srvPublishToSubscriber(0x204, 0);
     }
 }
