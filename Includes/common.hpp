@@ -25,6 +25,7 @@ namespace CTRPluginFramework
     void ForcePowerButton(MenuEntry *entry);
     void Shutdown(MenuEntry *entry);
     void ForceHomeButton(MenuEntry *entry);
+    void DisplayRegisters(MenuEntry *entry);
 }
 
 #endif

@@ -2,14 +2,12 @@
 
 #define PLUGIN_NAME         "MultiFunc3gx"
 #define MAJOR_VERSION       2
-#define MINER_VERSION       5
+#define MINER_VERSION       6
 #define REVISION_VERSION    0
 
 namespace CTRPluginFramework
 {
-    const std::string about = u8"If you have any trouble, please contact me.\n\n\n" \
-        u8"Twitter: https://twitter.com/HIDE810dev\n" \
-        u8"GitHub: https://github.com/HIDE810";
+    const std::string about = "If you have any trouble, please contact me.\n\nGitHub: https://github.com/HIDE810";
 
 	static MenuEntry *EntryWithHotkey(MenuEntry *entry, const Hotkey &hotkey)
     {
@@ -49,10 +47,15 @@ namespace CTRPluginFramework
             new MenuEntry("Force HOME button (ID:0x204)", ForceHomeButton)
         });
         
+        menu += new MenuFolder("Viewer", "",
+        {
+            new MenuEntry("Information", Information),
+            new MenuEntry("Registers", DisplayRegisters)
+        });
+        
         menu += new MenuEntry("Change screen brightness", nullptr, ChangeBrightness);
         menu += new MenuEntry("Fake error", nullptr, FakeError);
         menu += new MenuEntry("Hash Dumper", nullptr, HashDumper);
-        menu += new MenuEntry("Information", Information);
     }
 	
     static void    ToggleTouchscreenForceOn(void)
