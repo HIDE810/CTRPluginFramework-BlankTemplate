@@ -2,7 +2,7 @@
 
 #define PLUGIN_NAME         "MultiFunc3gx"
 #define MAJOR_VERSION       2
-#define MINER_VERSION       6
+#define MINER_VERSION       7
 #define REVISION_VERSION    0
 
 namespace CTRPluginFramework
@@ -49,8 +49,9 @@ namespace CTRPluginFramework
         
         menu += new MenuFolder("Viewer", "",
         {
-            new MenuEntry("Information", Information),
-            new MenuEntry("Registers", DisplayRegisters)
+            new MenuEntry("Information", DrawInfo),
+            new MenuEntry("Registers", DrawRegInfo),
+            new MenuEntry("Current key", DrawKeyInfo)
         });
         
         menu += new MenuEntry("Change screen brightness", nullptr, ChangeBrightness);
